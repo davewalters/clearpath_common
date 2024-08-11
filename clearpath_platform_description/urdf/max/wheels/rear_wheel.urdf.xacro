@@ -3,6 +3,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="rear_wheel">
 
   <xacro:macro name="rear_wheel" params="wheel_prefix *joint_pose">
+    <xacro:property name="mesh_scale" value="0.001 0.001 0.001"/>
     <link name="${wheel_prefix}_wheel">
       <inertial>
         <mass value="15.0" />
@@ -12,7 +13,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://clearpath_platform_description/meshes/max/rear_wheel.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="package://clearpath_platform_description/meshes/max/rear_wheel.stl" scale="${mesh_scale}" />
         </geometry>
       </visual>
       <collision>
