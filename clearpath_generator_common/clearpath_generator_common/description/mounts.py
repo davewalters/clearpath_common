@@ -36,6 +36,7 @@ from clearpath_config.mounts.types.mount import BaseMount
 from clearpath_config.mounts.types.pacs import PACS
 from clearpath_config.mounts.types.post import Post
 from clearpath_config.mounts.types.sick import SICKStand
+from clearpath_config.mounts.types.boss_male import BossMale
 
 
 class MountDescription():
@@ -125,13 +126,23 @@ class MountDescription():
                 self.SPACING: mount.spacing,
                 self.HEIGHT: mount.height
             })
+            
+    class BossMaleDescription(BaseDescription):
+        MODEL = 'model'
+
+        def __init__(self, mount: BossMale) -> None:
+            super().__init__(mount)
+            self.parameters.update({
+                self.MODEL: mount.model,
+            })
 
     MODEL = {
         FathPivot.MOUNT_MODEL: FathPivotDescription,
         PACS.Bracket.MOUNT_MODEL: PACSBracketDescription,
         PACS.Riser.MOUNT_MODEL: PACSRiserDescription,
         SICKStand.MOUNT_MODEL: SICKStandDescription,
-        Post.MOUNT_MODEL: PostDescription
+        Post.MOUNT_MODEL: PostDescription,
+        BossMale.MOUNT_MODEL: BossMaleDescription,
     }
 
     def __new__(cls, mount: BaseMount) -> BaseDescription:

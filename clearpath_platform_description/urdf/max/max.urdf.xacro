@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="namespace" default="" />
+  <xacro:arg name="is_sim" default="false" />
+
+  <!-- Included URDF/XACRO Files -->
+  <xacro:property name="M_PI" value="3.14159"/>
+  <xacro:include filename="$(find clearpath_platform_description)/urdf/max/wheels/front_wheel.urdf.xacro"/>
+  <xacro:include filename="$(find clearpath_platform_description)/urdf/max/wheels/rear_wheel.urdf.xacro"/>
+
+  <xacro:macro name="max" params="wheel:='default'">
+    <!-- Wheel Mounting Positions -->
+    <xacro:property name="wheelbase" value="1.225" />
+    <xacro:property name="front_track" value="0.946" />
+    <xacro:property name="rear_track" value="1.119" />
+    <xacro:property name="wheel_vertical_offset" value="0.0" />
+
+    <!-- Wheel Properties -->
+    <xacro:property name="front_wheel_width" value="0.20" />
+    <xacro:property name="rear_wheel_width" value="0.25" />
+    <xacro:property name="wheel_radius" value="0.335" />
+
+    <!-- Max wheel macros -->
+    <xacro:front_wheel wheel_prefix="front_left">
+      <origin xyz="${wheelbase} ${front_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+    </xacro:front_wheel>
+    <xacro:front_wheel wheel_prefix="front_right">
+      <origin xyz="${wheelbase} ${-front_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+    </xacro:front_wheel>
+    <xacro:rear_wheel wheel_prefix="rear_left">
+      <origin xyz="0 ${rear_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+    </xacro:rear_wheel>
+    <xacro:rear_wheel wheel_prefix="rear_right">
+      <origin xyz="0 ${-rear_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+    </xacro:rear_wheel>
+
+    <!-- Base link is on the mid-plane of the vehicle coincident with the rear axis -->
+    <link name="base_link">
+      <visual>
+        <origin xyz="0 0 0.325" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="0.1"/>
+        </geometry>
+      </visual>
+    </link>
+
+  </xacro:macro>
+
+</robot>

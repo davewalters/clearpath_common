@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:macro name="boss_male" params="name parent_link *origin">
+  <xacro:macro name="boss_male" params="name parent_link model *origin">
     <xacro:if value="${model == 'UNC_58'}">
         <xacro:property name="mesh_x" value="0.030"/>
         <xacro:property name="mesh_y" value="0.030"/>
@@ -16,7 +16,7 @@
       </visual>
       <collision>
         <geometry>
-          <cylinder radius="${mesh_x}/2.0" length="${mesh_z}" />
+          <cylinder radius="${mesh_x/2.0}" length="${mesh_z}" />
         </geometry>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
       </collision>
