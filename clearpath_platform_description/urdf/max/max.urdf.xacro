@@ -23,7 +23,7 @@
 
     <!-- Max wheel macros -->
     <xacro:front_wheel wheel_prefix="front_left">
-      <origin xyz="${wheelbase} ${front_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+      <origin xyz="${wheelbase} ${front_track/2} ${wheel_vertical_offset}" rpy="0 0 ${M_PI}" />
     </xacro:front_wheel>
     <xacro:front_wheel wheel_prefix="front_right">
       <origin xyz="${wheelbase} ${-front_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
@@ -32,18 +32,34 @@
       <origin xyz="0 ${rear_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
     </xacro:rear_wheel>
     <xacro:rear_wheel wheel_prefix="rear_right">
-      <origin xyz="0 ${-rear_track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
+      <origin xyz="0 ${-rear_track/2} ${wheel_vertical_offset}" rpy="0 0 ${M_PI}" />
     </xacro:rear_wheel>
+
+    <!-- Base footprint is on the mid-plane of the vehicle coincident with the rear axis plane and the ground plane-->
+    <link name="base_footprint">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="0.05"/>
+        </geometry>
+      </visual>
+    </link>
 
     <!-- Base link is on the mid-plane of the vehicle coincident with the rear axis -->
     <link name="base_link">
       <visual>
-        <origin xyz="0 0 0.325" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <sphere radius="0.1"/>
         </geometry>
       </visual>
     </link>
+
+    <joint name="base_link_joint" type="fixed">
+      <origin xyz="0 0 0.335" rpy="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+    </joint>
 
   </xacro:macro>
 
