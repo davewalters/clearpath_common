@@ -185,6 +185,8 @@ class ParamFile():
         return ros_parameters
 
     def read(self) -> None:
+        #print(f"full_path: {self.full_path}")
+        #input()
         file_contents = read_yaml(self.full_path)
 
         for node in file_contents:

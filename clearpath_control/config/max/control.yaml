@@ -1,0 +1,74 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+    use_sim_time: False
+
+    joint_state_broadcaster.type: joint_state_broadcaster/JointStateBroadcaster
+    platform_velocity_controller.type: steering_controllers_library/Bicycle
+
+platform_velocity_controller:
+  ros__parameters:
+    use_sim_time: False
+    
+    #steering_controllers_library parameters
+    reference_timeout: 1.0
+    front_steering: true
+    open_loop: false
+    velocity_rolling_window_size: 10
+    position_feedback: True
+    use_stamped_vel: True
+    rear_wheels_names: ["rear_left_wheel_joint"]
+    front_wheels_names: ["steering_axis_joint"]
+    rear_wheels_state_names: ["rear_left_wheel_joint"]
+    front_wheels_state_names: ["steering_axis_joint"]
+        
+    base_frame_id: base_link
+    odom_frame_id: odom
+    enable_odom_tf: false
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+
+    #bicycle_steering_controller parameters
+    wheelbase: 1.225
+    front_wheel_radius: 0.335
+    rear_wheel_radius: 0.335
+
+    #parameters carried over from clearpath control.yaml
+    publish_rate: 50.0
+    tf_frame_prefix_enable: false
+    cmd_vel_timeout: 0.25
+    
+    #publish_limited_velocity: true
+    use_stamped_vel: false
+    #velocity_rolling_window_size: 10
+
+    # Preserve turning radius when limiting speed/acceleration/jerk
+    preserve_turning_radius: true
+
+    # Publish limited velocity
+    publish_cmd: true
+
+    # Publish wheel data
+    publish_wheel_data: true
+
+    # Velocity and acceleration limits
+    # Whenever a min_* is unspecified, default to -max_*
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    linear.x.has_jerk_limits: false
+    linear.x.max_velocity: 3.5
+    linear.x.min_velocity: -3.5
+    linear.x.max_acceleration: 50.0
+    linear.x.min_acceleration: -50.0
+    linear.x.max_jerk: 0.0
+    linear.x.min_jerk: 0.0
+
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+    angular.z.has_jerk_limits: false
+    angular.z.max_velocity: 4.0
+    angular.z.min_velocity: -4.0
+    angular.z.max_acceleration: 40.0
+    angular.z.min_acceleration: -40.0
+    angular.z.max_jerk: 0.0
+    angular.z.min_jerk: 0.0
