@@ -43,6 +43,11 @@ from clearpath_config.sensors.types.imu import (
     Microstrain,
     RedshiftUM7
 )
+from clearpath_config.sensors.types.gps import (
+    BaseGPS,
+    Ublox,
+    ArduSimpleRTKLite
+)
 from clearpath_config.sensors.types.lidars_2d import BaseLidar2D, HokuyoUST, SickLMS1XX
 from clearpath_config.sensors.types.lidars_3d import BaseLidar3D, VelodyneLidar
 from clearpath_config.sensors.types.sensor import BaseSensor
@@ -170,6 +175,40 @@ class SensorDescription():
             self.parameters.update({
                 self.MODEL: sensor.device_type
             })
+            
+    class UbloxDescription(BaseDescription):
+        FRAME_ID = 'frame_id'
+        DEVICE = 'device'
+        UART1_BAUDRATE = 'uart1.baudrate'
+        RATE = 'rate'
+        DYNAMIC_MODEL = 'dynamic_model'
+        ENABLE_PPP = 'enable_ppp'
+        TMODE3 = 'tmode3'
+        SV_IN_RESET = 'sv_in.reset'
+        SV_IN_MIN_DUR = 'sv_in.min_dur'
+        SV_IN_ACC_LIMIT = 'sv_in.acc_limit'
+        INF_ALL = 'inf.all'
+        PUBLISH_ALL = 'publish.all'
+        PUBLISH_NAV_ALL = 'publish.nav.all'
+        
+        def __init__(self, sensor: Ublox) -> None:
+            super().__init__(sensor)
+            
+            self.parameters.update({
+                self.FRAME_ID: sensor.frame_id,
+                self.DEVICE: sensor.device,
+                self.UART1_BAUDRATE: sensor.uart1_baudrate,
+                self.RATE: sensor.rate,
+                self.DYNAMIC_MODEL: sensor.dynamic_model,
+                self.ENABLE_PPP: sensor.enable_ppp,
+                self.TMODE3: sensor.tmode3,
+                self.SV_IN_RESET: sensor.sv_in_reset,
+                self.SV_IN_MIN_DUR: sensor.sv_in_min_dur,
+                self.SV_IN_ACC_LIMIT: sensor.sv_in_acc_limit,
+                self.INF_ALL: sensor.inf_all,
+                self.PUBLISH_ALL: sensor.publish_all,
+                self.PUBLISH_NAV_ALL: sensor.publish_nav_all,
+            })
 
     MODEL = {
         HokuyoUST.SENSOR_MODEL: Lidar2dDescription,
@@ -181,6 +220,7 @@ class SensorDescription():
         CHRoboticsUM6.SENSOR_MODEL: ImuDescription,
         RedshiftUM7.SENSOR_MODEL: ImuDescription,
         StereolabsZed.SENSOR_MODEL: StereolabsZedDescription,
+        ArduSimpleRTKLite.SENSOR_MODEL: UbloxDescription,
     }
 
     def __new__(cls, sensor: BaseSensor) -> BaseDescription:
