@@ -43,11 +43,7 @@ from clearpath_config.sensors.types.imu import (
     Microstrain,
     RedshiftUM7
 )
-from clearpath_config.sensors.types.gps import (
-    BaseGPS,
-    Ublox,
-    ArduSimpleRTKLite
-)
+from clearpath_config.sensors.types.gps import BaseGPS, Ublox, ArdusimpleRTKLite
 from clearpath_config.sensors.types.lidars_2d import BaseLidar2D, HokuyoUST, SickLMS1XX
 from clearpath_config.sensors.types.lidars_3d import BaseLidar3D, VelodyneLidar
 from clearpath_config.sensors.types.sensor import BaseSensor
@@ -179,17 +175,17 @@ class SensorDescription():
     class UbloxDescription(BaseDescription):
         FRAME_ID = 'frame_id'
         DEVICE = 'device'
-        UART1_BAUDRATE = 'uart1.baudrate'
+        UART1_BAUDRATE = 'uart1_baudrate'
         RATE = 'rate'
         DYNAMIC_MODEL = 'dynamic_model'
         ENABLE_PPP = 'enable_ppp'
         TMODE3 = 'tmode3'
-        SV_IN_RESET = 'sv_in.reset'
-        SV_IN_MIN_DUR = 'sv_in.min_dur'
-        SV_IN_ACC_LIMIT = 'sv_in.acc_limit'
-        INF_ALL = 'inf.all'
-        PUBLISH_ALL = 'publish.all'
-        PUBLISH_NAV_ALL = 'publish.nav.all'
+        SV_IN_RESET = 'sv_in_reset'
+        SV_IN_MIN_DUR = 'sv_in_min_dur'
+        SV_IN_ACC_LIMIT = 'sv_in_acc_limit'
+        INF_ALL = 'inf_all'
+        PUBLISH_ALL = 'publish_all'
+        PUBLISH_NAV_ALL = 'publish_nav.all'
         
         def __init__(self, sensor: Ublox) -> None:
             super().__init__(sensor)
@@ -220,7 +216,7 @@ class SensorDescription():
         CHRoboticsUM6.SENSOR_MODEL: ImuDescription,
         RedshiftUM7.SENSOR_MODEL: ImuDescription,
         StereolabsZed.SENSOR_MODEL: StereolabsZedDescription,
-        ArduSimpleRTKLite.SENSOR_MODEL: UbloxDescription,
+        ArdusimpleRTKLite.SENSOR_MODEL: UbloxDescription,
     }
 
     def __new__(cls, sensor: BaseSensor) -> BaseDescription:
