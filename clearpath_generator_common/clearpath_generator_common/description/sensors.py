@@ -176,16 +176,16 @@ class SensorDescription():
         FRAME_ID = 'frame_id'
         DEVICE = 'device'
         UART1_BAUDRATE = 'uart1_baudrate'
-        RATE = 'rate'
+        MSG_RATE = 'rate'
         DYNAMIC_MODEL = 'dynamic_model'
         ENABLE_PPP = 'enable_ppp'
         TMODE3 = 'tmode3'
         SV_IN_RESET = 'sv_in_reset'
         SV_IN_MIN_DUR = 'sv_in_min_dur'
-        SV_IN_ACC_LIMIT = 'sv_in_acc_limit'
+        SV_IN_ACC_LIM = 'sv_in_acc_lim'
         INF_ALL = 'inf_all'
         PUBLISH_ALL = 'publish_all'
-        PUBLISH_NAV_ALL = 'publish_nav.all'
+        PUBLISH_NAV_ALL = 'publish_nav_all'
         
         def __init__(self, sensor: Ublox) -> None:
             super().__init__(sensor)
@@ -194,13 +194,13 @@ class SensorDescription():
                 self.FRAME_ID: sensor.frame_id,
                 self.DEVICE: sensor.device,
                 self.UART1_BAUDRATE: sensor.uart1_baudrate,
-                self.RATE: sensor.rate,
+                self.MSG_RATE: sensor.msg_rate,
                 self.DYNAMIC_MODEL: sensor.dynamic_model,
                 self.ENABLE_PPP: sensor.enable_ppp,
                 self.TMODE3: sensor.tmode3,
                 self.SV_IN_RESET: sensor.sv_in_reset,
                 self.SV_IN_MIN_DUR: sensor.sv_in_min_dur,
-                self.SV_IN_ACC_LIMIT: sensor.sv_in_acc_limit,
+                self.SV_IN_ACC_LIM: sensor.sv_in_acc_lim,
                 self.INF_ALL: sensor.inf_all,
                 self.PUBLISH_ALL: sensor.publish_all,
                 self.PUBLISH_NAV_ALL: sensor.publish_nav_all,
